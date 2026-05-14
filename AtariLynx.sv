@@ -226,7 +226,7 @@ joydb joydb (
   .joy_raw         ( joy_raw_payload )
 );
 
-assign USER_OUT = USER_OUT_DRIVE;
+assign USER_OUT = {USER_OUT_DRIVE[7:1], USER_OUT_DRIVE[0] & comlynx_tx};
 // [MiSTer-DB9 END]
 
 
@@ -534,7 +534,9 @@ wire comlynx_tx;
 // ComLynx is an open-drain shared bus: USER port bit 0 is the single DATA line.
 wire comlynx_rx = USER_IN[0] & comlynx_tx;
 
-assign USER_OUT = {6'b111111, comlynx_tx};
+// [MiSTer-DB9 BEGIN] - ComLynx tx folded into joydb USER_OUT mux above; original upstream line preserved for rerere learning
+//assign USER_OUT = {6'b111111, comlynx_tx};
+// [MiSTer-DB9 END]
 
 reg paused;
 always_ff @(posedge clk_sys) begin
