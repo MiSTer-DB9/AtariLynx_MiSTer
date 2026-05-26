@@ -416,7 +416,9 @@ hps_io #(.CONF_STR(CONF_STR), .WIDE(1)) hps_io
 	
 	.status(status),
 	.status_menumask({~gg_active, cart_ready}),
-	.status_in({status[63:39],ss_slot,status[36:0]}),
+	// [MiSTer-DB9 BEGIN] - widened to 128 bits, preserve [127:64] (joy_type at [127:125], joy_2p at [124])
+	.status_in({status[127:39],ss_slot,status[36:0]}),
+	// [MiSTer-DB9 END]
 	.status_set(statusUpdate),
 	
 	.sd_lba('{sd_lba}),
