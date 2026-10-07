@@ -413,22 +413,22 @@ wire [32:0] RTC_time;
 wire [31:0] joy0_unmod = joydb_1ena ?
 	!status[60] ? {
 		//S YXBAUDLR
-		OSD_STATUS? 32'b000000 : joydb_1_mapped[8:0]
+		OSD_STATUS? 32'b000000 : joydb_1_mapped[11:0]
 	} :
 	{
 		//S YXABUDLR
-		OSD_STATUS? 32'b000000 : joydb_1_mapped[8:0]
+		OSD_STATUS? 32'b000000 : joydb_1_mapped[11:0]
 	}
 : joy0_unmod_USB;
 
 wire [31:0] joystick_1 = joydb_2ena ?
 	!status[60] ? {
 		//S YXBAUDLR
-		OSD_STATUS? 32'b000000 : joydb_2_mapped[8:0]
+		OSD_STATUS? 32'b000000 : joydb_2_mapped[11:0]
 	} :
 	{
 		//S YXABUDLR
-		OSD_STATUS? 32'b000000 : joydb_2_mapped[8:0]
+		OSD_STATUS? 32'b000000 : joydb_2_mapped[11:0]
 	}
 : joydb_1ena ? joy0_unmod_USB : joystick_1_USB;
 
